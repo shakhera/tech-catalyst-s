@@ -1,15 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import DropDrown from "../DropDrown/DropDrown";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { FaRegUserCircle } from "react-icons/fa";
+import "./Header.css";
 
 const Header = () => {
+  const [isHovered, setHovered] = useState(false);
+
   const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
@@ -19,6 +22,14 @@ const Header = () => {
         console.log(error);
       });
   };
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+  // const handleMouseLeave = () => {
+  //   setHovered(false);
+  // };
+  // const renderTooltip = (text) => <Tooltip>{text}</Tooltip>;
   return (
     <div className="d-felx align-items-center">
       <Navbar collapseOnSelect expand="md" className="">
@@ -40,26 +51,65 @@ const Header = () => {
                 About
               </Link>
 
-              {/* <Nav.Link href="#pricing">About</Nav.Link> */}
-
               <DropDrown></DropDrown>
               <Nav.Link href="#pricing">Blog</Nav.Link>
               <Nav.Link href="#pricing">Contact</Nav.Link>
             </Nav>
             <Nav>
-              {/* <Nav.Link href="#deets">Profile</Nav.Link> */}
-
               {user ? (
                 <>
                   <>
-                    {user.email}
-
-                    {/* <img
-                    src={user.photoURL}
-                    alt="Profile"
-                    className="rounded-full h-8 w-8 ml-2"
-                  /> */}
+                    <div
+                      onMouseEnter={handleMouseEnter}
+                      className="d-flex align-items-center me-2"
+                    >
+                      {user.photoURL ? (
+                        <img
+                          src={user.photoURL}
+                          alt="Profile"
+                          className="rounded-circle  me-2"
+                          style={{ width: "40px", height: "40px" }}
+                        />
+                      ) : (
+                        <FaRegUserCircle
+                          size={20}
+                          className={isHovered ? "icon-hover" : "Your-name"}
+                        ></FaRegUserCircle>
+                      )}
+                    </div>
                   </>
+
+                  {/* <OverlayTrigger
+                    placement="bottom"
+                    overlay={renderTooltip(user.displayName || "Your Name")}
+                  >
+                    <div
+                      className="d-flex align-items-center me-2"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      {user.photoURL ? (
+                        <img
+                          src={user.photoURL}
+                          alt="Profile"
+                          className={`rounded-full h-8 w-8 me-2 ${
+                            isHovered ? "profile-hover" : ""
+                          }`}
+                        />
+                      ) : (
+                        <OverlayTrigger
+                          placement="bottom"
+                          overlay={renderTooltip("User")}
+                        >
+                          <FaRegUserCircle
+                            size={20}
+                            className={isHovered ? "icon-hover" : ""}
+                          />
+                        </OverlayTrigger>
+                      )}
+                    </div>
+                  </OverlayTrigger> */}
+
                   <Button
                     onClick={handleLogOut}
                     variant="dark"

@@ -2,16 +2,15 @@ import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { sendEmailVerification } from "firebase/auth";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
 const SignUp = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const boxShadowStyle = {
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-  };
-
-  const { createUser } = useContext(AuthContext);
+  const { createUser, googleSignIn } = useContext(AuthContext);
+  //   const googleProvider = new GoogleAuthProvider();
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -49,7 +48,6 @@ const SignUp = () => {
   const varificationEmail = (user) => {
     sendEmailVerification(user)
       .then(() => {
-        setVerificationSent(true);
         alert("Please varify email");
       })
       .catch((error) => {
@@ -58,11 +56,19 @@ const SignUp = () => {
       });
   };
 
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
   return (
-    <div
-      className="mt-5 w-50 mx-auto border px-5 py-3 rounded "
-      style={boxShadowStyle}
-    >
+    <div className="mt-5 w-50 mx-auto border px-5 py-3 rounded shadow-lg p-3 mb-5 bg-body-tertiary rounded">
       <h2 className="text-center fw-bold">Create an Account</h2>
 
       <Form onSubmit={handleSignUp}>
@@ -113,13 +119,29 @@ const SignUp = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="px-4 py-2">
+        <Button variant="primary" type="submit" className="px-3 py-2">
           <span className="fs-6">SignUp</span>
         </Button>
         <br />
         <Form.Text className="text-muted">
           Already have an Account? <Link to="/login">Login</Link>
         </Form.Text>
+        <h3 className="align-items-center">Or</h3>
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="outline-secondary"
+          type="submit"
+          className="px-4 mb-4 py-2"
+        >
+          <span className="fs-6">
+            <FaGoogle></FaGoogle> CONTINUE WITH GOOGLE
+          </span>
+        </Button>
+        <Button variant="outline-info" type="submit" className="px-4  py-2">
+          <span className="fs-6">
+            <FaGithub></FaGithub> CONTINUE WITH GITHUB
+          </span>
+        </Button>
       </Form>
       <p className="text-danger">{error}</p>
       <p className="text-success">{success}</p>

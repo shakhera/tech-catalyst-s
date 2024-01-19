@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 
 const Login = () => {
-  const boxShadowStyle = {
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
-  };
-
   const { logIn } = useContext(AuthContext);
 
   const handleLogIn = (event) => {
@@ -28,10 +24,7 @@ const Login = () => {
       });
   };
   return (
-    <div
-      className="mt-5 w-50 mx-auto border px-5 py-3 rounded "
-      style={boxShadowStyle}
-    >
+    <div className="mt-5 mx-auto border px-5 py-3 rounded w-75 shadow-lg p-3 mb-5 bg-body-tertiary rounded ">
       <h2 className="text-center fw-bold">Login Page</h2>
       <Form onSubmit={handleLogIn}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
