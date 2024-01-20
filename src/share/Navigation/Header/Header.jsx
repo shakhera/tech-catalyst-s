@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import DropDrown from "../DropDrown/DropDrown";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { FaRegUserCircle } from "react-icons/fa";
 import "./Header.css";
@@ -45,15 +44,30 @@ const Header = () => {
                 Home
               </Link>
               <Link
-                to="/about"
+                to="#"
                 className="text-decoration-none me-3 text-secondary-emphasis"
               >
                 About
               </Link>
+              {/* <Link
+                to="/courses"
+                className="text-decoration-none me-3 text-secondary-emphasis"
+              >
+                Courses
+              </Link> */}
 
-              <DropDrown></DropDrown>
-              <Nav.Link href="#pricing">Blog</Nav.Link>
-              <Nav.Link href="#pricing">Contact</Nav.Link>
+              <Link
+                to="/blog"
+                className="text-decoration-none me-3 text-success-emphasis"
+              >
+                Blog
+              </Link>
+              <Link
+                to="#"
+                className="text-decoration-none me-3 text-success-emphasis"
+              >
+                Contact
+              </Link>
             </Nav>
             <Nav>
               {user ? (
@@ -129,7 +143,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <hr className="" />
+      <hr className="shadow" />
     </div>
   );
 };

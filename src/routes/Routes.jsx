@@ -4,6 +4,10 @@ import Root from "../Layout/Root";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/SignIn/Login/Login";
 import SignUp from "../pages/SignIn/SignUp/SignUp";
+import Blog from "../pages/Blog/Blog";
+import Courses from "../pages/Home/Courses/Courses";
+import CourseCetagory from "../pages/Home/CourseCetagory/CourseCetagory";
+import CourseLayout from "../Layout/CourseLayout";
 
 export const routers = createBrowserRouter([
   {
@@ -21,6 +25,33 @@ export const routers = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
+      },
+
+      {
+        path: "/courseCetagory/:id",
+        element: <CourseCetagory></CourseCetagory>,
+        loader: ({ params }) =>
+          fetch(
+            `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courseCategory/${params.id}`
+          ),
+      },
+    ],
+  },
+  {
+    path: "/courses",
+    element: <CourseLayout></CourseLayout>,
+    children: [
+      {
+        path: ":id",
+        element: <Courses></Courses>,
+        loader: ({ params }) =>
+          fetch(
+            `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params.id}`
+          ),
       },
     ],
   },
