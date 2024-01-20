@@ -1,8 +1,9 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
+  const navigate = useNavigate();
   //   console.log(course);
   const {
     img,
@@ -13,6 +14,14 @@ const CourseCard = ({ course }) => {
     name,
     _id,
   } = course;
+
+  //   const handleLinkClick = () => {
+  //     navigate(`/courses/${_id}`);
+  // setTimeout(() => {
+  //   navigate(`/rightNavBar/${_id}`);
+  // }, 0);
+  // navigate(`/rightNavBar/${_id}`);
+  //   };
   return (
     <div>
       <Card className="mt-4 ms-5">
@@ -26,6 +35,9 @@ const CourseCard = ({ course }) => {
             {description}...
           </Card.Text>
           <Link to={`/courses/${_id}`}>Read More</Link>
+          {/* <Button onClick={handleLinkClick} variant="link">
+            Read More
+          </Button> */}
         </Card.Body>
       </Card>
     </div>

@@ -5,6 +5,7 @@ import UpperNavbar from "../share/Navigation/UpperNavbar/UpperNavbar";
 import Header from "../share/Navigation/Header/Header";
 import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../share/Footer/Footer";
+import RightSideNav from "../share/Navigation/RightSideNav/RightSideNav";
 
 const CourseLayout = () => {
   return (
@@ -13,10 +14,12 @@ const CourseLayout = () => {
       <Header></Header>
       <Container>
         <Row>
-          <Col xs={12} md={8}>
+          <Col xs={12} md={9}>
             <Outlet></Outlet>
           </Col>
-          <Col xs={6} md={4}></Col>
+          <Col xs={6} md={3}>
+            <RightSideNav></RightSideNav>
+          </Col>
         </Row>
       </Container>
       <Footer></Footer>

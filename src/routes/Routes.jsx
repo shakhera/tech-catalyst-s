@@ -8,6 +8,7 @@ import Blog from "../pages/Blog/Blog";
 import Courses from "../pages/Home/Courses/Courses";
 import CourseCetagory from "../pages/Home/CourseCetagory/CourseCetagory";
 import CourseLayout from "../Layout/CourseLayout";
+import RightSideNav from "../share/Navigation/RightSideNav/RightSideNav";
 
 export const routers = createBrowserRouter([
   {
@@ -53,6 +54,14 @@ export const routers = createBrowserRouter([
             `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params.id}`
           ),
       },
+      // {
+      //   path: ":id",
+      //   element: <RightSideNav></RightSideNav>,
+      //   loader: ({ params }) =>
+      //     fetch(
+      //       `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params.id}`
+      //     ),
+      // },
     ],
   },
 ]);
