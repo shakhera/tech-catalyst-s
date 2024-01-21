@@ -2,7 +2,7 @@ import React from "react";
 import { Accordion } from "react-bootstrap";
 
 const CourseTopicInfo = ({ topicRelatedInfo }) => {
-  console.log(topicRelatedInfo);
+  // console.log(topicRelatedInfo);
   const { details, heading } = topicRelatedInfo;
   return (
     <div>

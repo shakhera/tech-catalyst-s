@@ -11,6 +11,8 @@ import CourseLayout from "../Layout/CourseLayout";
 import RightSideNav from "../share/Navigation/RightSideNav/RightSideNav";
 import CourseHomeLayout from "../Layout/CourseHomeLayout";
 import CourseHomeSlideBar from "../pages/Home/CourseHomeSlideBar/CourseHomeSlideBar";
+import CheckoutCourse from "../pages/Home/CheckoutCourse/CheckoutCourse";
+import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
 export const routers = createBrowserRouter([
   {
@@ -54,16 +56,24 @@ export const routers = createBrowserRouter([
     ],
   },
   {
-    path: "/courses",
+    path: "/",
     element: <CourseLayout></CourseLayout>,
     children: [
       {
-        path: ":id",
+        path: "courses/:id",
         element: <Courses></Courses>,
         loader: ({ params }) =>
           fetch(
             `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params.id}`
           ),
+      },
+      {
+        path: "checkoutCourse",
+        element: (
+          <PrivateRoutes>
+            <CheckoutCourse></CheckoutCourse>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

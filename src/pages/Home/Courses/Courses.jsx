@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link, useLoaderData } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaDownload } from "react-icons/fa";
 import CourseTopicInfo from "../CourseTopicInfo/CourseTopicInfo";
+import jsPDF from "jspdf";
 
 const Courses = () => {
   const courseDetails = useLoaderData();
-  console.log(courseDetails);
+  // console.log(courseDetails);
   const {
     img,
     details,
@@ -16,11 +17,31 @@ const Courses = () => {
     name,
     course_id,
   } = courseDetails;
+
+  const pdfRef = useRef();
+
+  const handleDownloadPDF = () => {
+    const pdf = new jsPDF();
+    const imgData = img;
+    pdf.text(name, 20, 10);
+    pdf.addImage(imgData, "JPEG", 15, 40, 180, 120);
+    pdf.text(introductoryTitle, 20, 20);
+    pdf.text(description, 20, 30);
+    pdf.save(`${name}_Course_Details.pdf`);
+  };
   return (
     <div>
       <Card>
-        <Card.Title className="text-center py-3 fs-2 fw-bold">
+        <Card.Title className="text-center py-3 pb-2 fs-2 fw-bold">
           {name}
+
+          <Button
+            variant="link"
+            onClick={handleDownloadPDF}
+            style={{ marginLeft: "10px" }}
+          >
+            <FaDownload /> Download PDF
+          </Button>
         </Card.Title>
         <Card.Img variant="top" src={img} />
         <Card.Body>
@@ -30,8 +51,9 @@ const Courses = () => {
             More about details this course
           </Card.Text>
           <div>
-            {details.topicsCovered.map((topicRelatedInfo) => (
+            {details.topicsCovered.map((topicRelatedInfo, index) => (
               <CourseTopicInfo
+                key={index}
                 topicRelatedInfo={topicRelatedInfo}
               ></CourseTopicInfo>
             ))}
@@ -42,7 +64,7 @@ const Courses = () => {
                 <FaArrowLeft></FaArrowLeft>
               </Button>
             </Link>
-            <Link>
+            <Link to="/checkoutCourse">
               <Button variant="danger">Get premium access.</Button>
             </Link>
           </div>
