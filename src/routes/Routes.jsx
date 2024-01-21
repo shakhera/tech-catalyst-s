@@ -68,12 +68,16 @@ export const routers = createBrowserRouter([
           ),
       },
       {
-        path: "checkoutCourse",
+        path: "checkoutCourse/:_id",
         element: (
           <PrivateRoutes>
             <CheckoutCourse></CheckoutCourse>
           </PrivateRoutes>
         ),
+        // loader: ({ params }) =>
+        //   fetch(
+        //     `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params._id}`
+        //   ),
       },
     ],
   },

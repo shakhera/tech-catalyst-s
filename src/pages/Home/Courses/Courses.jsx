@@ -7,7 +7,7 @@ import jsPDF from "jspdf";
 
 const Courses = () => {
   const courseDetails = useLoaderData();
-  // console.log(courseDetails);
+  console.log(courseDetails);
   const {
     img,
     details,
@@ -16,6 +16,7 @@ const Courses = () => {
     introductoryTitle,
     name,
     course_id,
+    _id,
   } = courseDetails;
 
   const pdfRef = useRef();
@@ -64,7 +65,7 @@ const Courses = () => {
                 <FaArrowLeft></FaArrowLeft>
               </Button>
             </Link>
-            <Link to="/checkoutCourse">
+            <Link to={`/checkoutCourse/${_id}`}>
               <Button variant="danger">Get premium access.</Button>
             </Link>
           </div>
