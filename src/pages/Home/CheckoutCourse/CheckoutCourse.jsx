@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const CheckoutCourse = () => {
   const { _id } = useParams();
-  console.log(_id);
+  // console.log(_id);
   const [courseDetails, setCourseDetails] = useState(null);
 
   useEffect(() => {
