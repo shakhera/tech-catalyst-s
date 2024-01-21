@@ -9,6 +9,8 @@ import Courses from "../pages/Home/Courses/Courses";
 import CourseCetagory from "../pages/Home/CourseCetagory/CourseCetagory";
 import CourseLayout from "../Layout/CourseLayout";
 import RightSideNav from "../share/Navigation/RightSideNav/RightSideNav";
+import CourseHomeLayout from "../Layout/CourseHomeLayout";
+import CourseHomeSlideBar from "../pages/Home/CourseHomeSlideBar/CourseHomeSlideBar";
 
 export const routers = createBrowserRouter([
   {
@@ -31,14 +33,23 @@ export const routers = createBrowserRouter([
         path: "/blog",
         element: <Blog></Blog>,
       },
-
+    ],
+  },
+  {
+    path: "/courseCetagory",
+    element: <CourseHomeLayout></CourseHomeLayout>,
+    children: [
       {
-        path: "/courseCetagory/:id",
+        path: ":id",
         element: <CourseCetagory></CourseCetagory>,
         loader: ({ params }) =>
           fetch(
             `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courseCategory/${params.id}`
           ),
+      },
+      {
+        path: "",
+        element: <CourseHomeSlideBar></CourseHomeSlideBar>,
       },
     ],
   },
@@ -54,14 +65,6 @@ export const routers = createBrowserRouter([
             `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params.id}`
           ),
       },
-      // {
-      //   path: ":id",
-      //   element: <RightSideNav></RightSideNav>,
-      //   loader: ({ params }) =>
-      //     fetch(
-      //       `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params.id}`
-      //     ),
-      // },
     ],
   },
 ]);

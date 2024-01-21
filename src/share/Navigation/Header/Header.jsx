@@ -49,12 +49,12 @@ const Header = () => {
               >
                 About
               </Link>
-              {/* <Link
-                to="/courses"
+              <Link
+                to="/courseCetagory"
                 className="text-decoration-none me-3 text-secondary-emphasis"
               >
                 Courses
-              </Link> */}
+              </Link>
 
               <Link
                 to="/blog"
