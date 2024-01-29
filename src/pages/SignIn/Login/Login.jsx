@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 
 const Login = () => {
+  const [error, setError] = useState("");
+
   const { logIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const Login = () => {
 
   const handleLogIn = (event) => {
     event.preventDefault();
+    setError("");
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
@@ -23,10 +26,16 @@ const Login = () => {
         console.log(loggedUser);
         form.reset();
         navigate(from, { replace: true });
+
+        // if (user.emailVerified) {
+        //   navigate(from, { replace: true });
+        // } else {
+        //   alert("your email is not valiried");
+        // }
       })
       .catch((error) => {
         console.error(error.message);
-        // setError(error.message);
+        setError(error.message);
       });
   };
   return (
@@ -63,6 +72,7 @@ const Login = () => {
           You have not an Account? <Link to="/signup">SignUp</Link>
         </Form.Text>
       </Form>
+      <p className="text-danger">{error}</p>
     </div>
   );
 };

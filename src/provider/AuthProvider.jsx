@@ -4,9 +4,11 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
@@ -24,15 +26,21 @@ const AuthProvider = ({ children }) => {
   };
 
   const createUser = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const logIn = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
     return signOut(auth);
+  };
+  const varificationEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
   };
   useEffect(() => {
     const unSubScribe = onAuthStateChanged(auth, (currentUser) => {
@@ -51,6 +59,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     googleSignIn,
     loading,
+    varificationEmail,
+    updateUserProfile,
   };
 
   return (

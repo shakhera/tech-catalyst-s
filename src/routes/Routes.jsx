@@ -13,6 +13,8 @@ import CourseHomeLayout from "../Layout/CourseHomeLayout";
 import CourseHomeSlideBar from "../pages/Home/CourseHomeSlideBar/CourseHomeSlideBar";
 import CheckoutCourse from "../pages/Home/CheckoutCourse/CheckoutCourse";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ErrorPageLayout from "../Layout/ErrorPageLayout";
 
 export const routers = createBrowserRouter([
   {
@@ -78,6 +80,17 @@ export const routers = createBrowserRouter([
         //   fetch(
         //     `https://tech-catalyst-s-server-shakhera-shakheras-projects.vercel.app/courses/${params._id}`
         //   ),
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <ErrorPageLayout></ErrorPageLayout>,
+    children: [
+      {
+        path: "*",
+        element: <ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
       },
     ],
   },

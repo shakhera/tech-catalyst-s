@@ -4,7 +4,7 @@ import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer py-5 bg-dark text-light">
+      <footer className="footer py-3 bg-dark text-light">
         <Container>
           <div className="mx-auto text-center">
             <a className="pe-5 ">
@@ -41,11 +41,7 @@ const Footer = () => {
               </svg>
             </a>
           </div>
-        </Container>
-      </footer>
-      <footer className="footer bg-neutral text-neutral-content px-10 py-4 border-t border-base-300 footer-center shadow">
-        <Container>
-          <aside className="text-center">
+          <aside className="text-center mt-3">
             <p>Copyright © 2024 - All right reserved by TCS-CatalystS</p>
           </aside>
         </Container>

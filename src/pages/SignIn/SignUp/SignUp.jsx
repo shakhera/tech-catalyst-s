@@ -9,7 +9,8 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const { createUser, googleSignIn } = useContext(AuthContext);
+  const { createUser, googleSignIn, varificationEmail, updateUserProfile } =
+    useContext(AuthContext);
   //   const googleProvider = new GoogleAuthProvider();
 
   const handleSignUp = (event) => {
@@ -36,8 +37,10 @@ const SignUp = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        form.reset();
         setSuccess("user has been create successfully");
-        varificationEmail(result.user);
+        handleVarificationEmail();
+        handleUpdateUserProfile(name, photoUrl);
       })
       .catch((error) => {
         console.error(error.message);
@@ -45,8 +48,8 @@ const SignUp = () => {
       });
   };
 
-  const varificationEmail = (user) => {
-    sendEmailVerification(user)
+  const handleVarificationEmail = () => {
+    varificationEmail()
       .then(() => {
         alert("Please varify email");
       })
@@ -62,6 +65,18 @@ const SignUp = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
       })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
+  const handleUpdateUserProfile = (name, photoUrl) => {
+    const profile = {
+      displayName: name,
+      photoUrl: photoUrl,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
       .catch((error) => {
         console.error(error.message);
       });
