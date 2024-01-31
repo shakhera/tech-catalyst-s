@@ -5,6 +5,7 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -42,6 +43,10 @@ const AuthProvider = ({ children }) => {
   const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
+
+  const resetPassword = (emaill) => {
+    return sendPasswordResetEmail(auth, emaill);
+  };
   useEffect(() => {
     const unSubScribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -61,6 +66,7 @@ const AuthProvider = ({ children }) => {
     loading,
     varificationEmail,
     updateUserProfile,
+    resetPassword,
   };
 
   return (

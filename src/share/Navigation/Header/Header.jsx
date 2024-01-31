@@ -22,18 +22,10 @@ const Header = () => {
       });
   };
 
-  const handleMouseEnter = () => {
-    setHovered(true);
-  };
-  // const handleMouseLeave = () => {
-  //   setHovered(false);
-  // };
-  // const renderTooltip = (text) => <Tooltip>{text}</Tooltip>;
   return (
     <div className="d-felx align-items-center">
       <Navbar collapseOnSelect expand="md" className="">
         <Container>
-          {/* <Navbar.Brand href="#home">TechCatalystS</Navbar.Brand> */}
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -74,55 +66,26 @@ const Header = () => {
                 <>
                   <>
                     <div
-                      onMouseEnter={handleMouseEnter}
-                      className="d-flex align-items-center me-2"
+                      onMouseEnter={() => setHovered(true)}
+                      onMouseLeave={() => setHovered(false)}
                     >
                       {user.photoURL ? (
-                        <img
-                          src={user.photoURL}
-                          alt="Profile"
-                          className="rounded-circle  me-2"
-                          style={{ width: "40px", height: "40px" }}
-                        />
+                        <>
+                          <img
+                            src={user.photoURL}
+                            alt="Profile"
+                            className="rounded-circle  me-2"
+                            style={{ width: "40px", height: "40px" }}
+                          />
+                          {isHovered && (
+                            <span>{user.displayName || "Your Name"}</span>
+                          )}
+                        </>
                       ) : (
-                        <FaRegUserCircle
-                          size={20}
-                          className={isHovered ? "icon-hover" : "Your-name"}
-                        ></FaRegUserCircle>
+                        <FaRegUserCircle size={20}></FaRegUserCircle>
                       )}
                     </div>
                   </>
-
-                  {/* <OverlayTrigger
-                    placement="bottom"
-                    overlay={renderTooltip(user.displayName || "Your Name")}
-                  >
-                    <div
-                      className="d-flex align-items-center me-2"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {user.photoURL ? (
-                        <img
-                          src={user.photoURL}
-                          alt="Profile"
-                          className={`rounded-full h-8 w-8 me-2 ${
-                            isHovered ? "profile-hover" : ""
-                          }`}
-                        />
-                      ) : (
-                        <OverlayTrigger
-                          placement="bottom"
-                          overlay={renderTooltip("User")}
-                        >
-                          <FaRegUserCircle
-                            size={20}
-                            className={isHovered ? "icon-hover" : ""}
-                          />
-                        </OverlayTrigger>
-                      )}
-                    </div>
-                  </OverlayTrigger> */}
 
                   <Button
                     onClick={handleLogOut}

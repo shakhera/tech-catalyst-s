@@ -22,8 +22,8 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
     const confirmPassword = form.confirm.value;
-    const photoUrl = form.photoUrl.value;
-    console.log(name, email, password, photoUrl);
+    const photoURL = form.photoUrl.value;
+    console.log(name, email, password, photoURL);
 
     if (password !== confirmPassword) {
       setError("Err: Your Pass did not match ");
@@ -39,8 +39,8 @@ const SignUp = () => {
         console.log(loggedUser);
         form.reset();
         setSuccess("user has been create successfully");
-        handleVarificationEmail();
-        handleUpdateUserProfile(name, photoUrl);
+        // handleVarificationEmail();
+        handleUpdateUserProfile(name, photoURL);
       })
       .catch((error) => {
         console.error(error.message);
@@ -48,16 +48,16 @@ const SignUp = () => {
       });
   };
 
-  const handleVarificationEmail = () => {
-    varificationEmail()
-      .then(() => {
-        alert("Please varify email");
-      })
-      .catch((error) => {
-        console.error(error.message);
-        setError(error.message);
-      });
-  };
+  // const handleVarificationEmail = () => {
+  //   varificationEmail()
+  //     .then(() => {
+  //       alert("Please varify email");
+  //     })
+  //     .catch((error) => {
+  //       console.error(error.message);
+  //       setError(error.message);
+  //     });
+  // };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -70,11 +70,12 @@ const SignUp = () => {
       });
   };
 
-  const handleUpdateUserProfile = (name, photoUrl) => {
+  const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
       displayName: name,
-      photoUrl: photoUrl,
+      photoURL: photoURL,
     };
+    console.log(profile);
     updateUserProfile(profile)
       .then(() => {})
       .catch((error) => {

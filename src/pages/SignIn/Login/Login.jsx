@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const Login = () => {
   const [error, setError] = useState("");
-
-  const { logIn } = useContext(AuthContext);
+  const emailRef = useRef();
+  const { logIn, resetPassword } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,12 +27,23 @@ const Login = () => {
         console.log(loggedUser);
         form.reset();
         navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setError(error.message);
+      });
+  };
 
-        // if (user.emailVerified) {
-        //   navigate(from, { replace: true });
-        // } else {
-        //   alert("your email is not valiried");
-        // }
+  const handleReserPassword = (event) => {
+    const emaill = emailRef.current.value;
+    console.log(emaill);
+    if (!emaill) {
+      alert("Please provide valid email and reset your password");
+      return;
+    }
+    resetPassword(emaill)
+      .then(() => {
+        alert("Please cheak your email");
       })
       .catch((error) => {
         console.error(error.message);
@@ -46,6 +58,7 @@ const Login = () => {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
+            ref={emailRef}
             name="email"
             placeholder="Enter email"
             required
@@ -60,10 +73,15 @@ const Login = () => {
             placeholder="Password"
             required
           />
+          <Form.Text className="text-muted">
+            Forget Password? Please
+            <Button onClick={handleReserPassword} variant="link">
+              {" "}
+              Reset Password
+            </Button>
+          </Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
+
         <Button variant="primary" type="submit" className="px-4 py-2">
           <span className="fs-6">Login</span>
         </Button>
