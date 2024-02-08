@@ -26,8 +26,6 @@ Visit our live site at (https://shakhera.github.io/tech-catalyst-s/)
 - **Backend:**
   - Node.js
   - Express.js
-- **Database:**
-  - MongoDB
 - **Version Control:**
   - Git
 - **Deployment:**
