@@ -4,7 +4,7 @@ Welcome to the TechCatalystS website! Explore the world of technology with our i
 
 ## Live Site
 
-Visit our live site at (https:)
+Visit our live site at (https://shakhera.github.io/tech-catalyst-s/)
 
 ## Features and Functionality
 
