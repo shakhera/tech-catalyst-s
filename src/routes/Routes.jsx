@@ -15,6 +15,7 @@ import CheckoutCourse from "../pages/Home/CheckoutCourse/CheckoutCourse";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import ErrorPageLayout from "../Layout/ErrorPageLayout";
+import FAQ from "../pages/FAQ/FAQ";
 
 export const routers = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ export const routers = createBrowserRouter([
         path: "/signup",
         element: <SignUp></SignUp>,
       },
+
       {
         path: "/blog",
         element: <Blog></Blog>,
@@ -87,6 +89,11 @@ export const routers = createBrowserRouter([
     path: "/",
     element: <ErrorPageLayout></ErrorPageLayout>,
     children: [
+      {
+        path: "/faq",
+        element: <FAQ></FAQ>,
+      },
+
       {
         path: "*",
         element: <ErrorPage></ErrorPage>,

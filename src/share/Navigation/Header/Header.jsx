@@ -47,6 +47,12 @@ const Header = () => {
               >
                 Courses
               </Link>
+              <Link
+                to="/faq"
+                className="text-decoration-none me-3 text-secondary-emphasis"
+              >
+                FAQ
+              </Link>
 
               <Link
                 to="/blog"
